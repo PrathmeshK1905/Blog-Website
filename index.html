@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogging Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            border-bottom: #e8491d 3px solid;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background: #e8491d;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section#blog {
+            margin: 20px 0;
+        }
+        article.post {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        article.post h2 {
+            margin-top: 0;
+        }
+        article.post p {
+            line-height: 1.6;
+        }
+        article.post .meta {
+            color: #555;
+            font-size: 0.9em;
+        }
+        article.post .actions {
+            margin-top: 10px;
+        }
+        article.post .actions button {
+            background: #e8491d;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        article.post .actions button:hover {
+            background: #d8401b;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        form#new-post {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        form#new-post input[type="text"],
+        form#new-post textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form#new-post input[type="submit"] {
+            background: #e8491d;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        form#new-post input[type="submit"]:hover {
+            background: #d8401b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>My Blog</h1>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+    <section id="blog">
+        <div class="container">
+            <form id="new-post">
+                <input type="text" id="post-title" placeholder="Title" required>
+                <textarea id="post-content" placeholder="Write your post here..." required></textarea>
+                <input type="submit" value="Publish Post">
+            </form>
+            <div id="posts">
+                <!-- Blog posts will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>My Blog, Copyright &copy; 2024</p>
+    </footer>
+
+    <script>
+        document.getElementById('new-post').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+
+            const postContainer = document.createElement('article');
+            postContainer.className = 'post';
+
+            const postTitle = document.createElement('h2');
+            postTitle.textContent = title;
+
+            const postMeta = document.createElement('p');
+            postMeta.className = 'meta';
+            postMeta.textContent = `Posted by User on ${new Date().toLocaleDateString()}`;
+
+            const postContent = document.createElement('p');
+            postContent.textContent = content;
+
+            const actions = document.createElement('div');
+            actions.className = 'actions';
+
+            const readMoreButton = document.createElement('button');
+            readMoreButton.textContent = 'Read More';
+            readMoreButton.addEventListener('click', function() {
+                alert('Read more functionality coming soon!');
+            });
+
+            actions.appendChild(readMoreButton);
+            postContainer.appendChild(postTitle);
+            postContainer.appendChild(postMeta);
+            postContainer.appendChild(postContent);
+            postContainer.appendChild(actions);
+
+            document.getElementById('posts').prepend(postContainer);
+
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+        });
+    </script>
+</body>
+</html>
